@@ -201,6 +201,11 @@ func resourceBucketVersioningDelete(ctx context.Context, d *schema.ResourceData,
 		return nil
 	}
 
+	if tfawserr.ErrMessageContains(err, ErrCodeInvalidBucketState, "An Object Lock configuration is present on this bucket, so the versioning state cannot be changed") {
+		log.Printf("[WARN] S3 bucket versioning cannot be suspended with Object Lock Configuration present on bucket (%s), removing from state", bucket)
+		return nil
+	}
+
 	if err != nil {
 		return diag.FromErr(fmt.Errorf("error deleting S3 bucket versioning (%s): %w", d.Id(), err))
 	}
