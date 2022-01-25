@@ -536,6 +536,9 @@ resource "aws_s3_bucket_public_access_block" "test" {
 }
 
 resource "aws_s3_bucket_object" "dags" {
+  # Must have bucket versioning enabled first
+  depends_on = [aws_s3_bucket_versioning.test]
+
   bucket       = aws_s3_bucket.test.id
   acl          = "private"
   key          = "dags/"
@@ -581,6 +584,7 @@ resource "aws_iam_role_policy" "test" {
 }
 POLICY
 }
+
 
 `, rName)
 }
