@@ -1677,9 +1677,12 @@ func testAccBucketObjectConfig_updateable(rName string, bucketVersioning bool, s
 	return fmt.Sprintf(`
 resource "aws_s3_bucket" "object_bucket_3" {
   bucket = %[1]q
+}
 
-  versioning {
-    enabled = %[2]t
+resource "aws_s3_bucket_versioning" "object_bucket_3" {
+  bucket = aws_s3_bucket.object_bucket_3.id
+  versioning_configuration {
+    status = "Enabled"
   }
 }
 
@@ -1696,9 +1699,12 @@ func testAccBucketObjectConfig_updateableViaAccessPoint(rName string, bucketVers
 	return fmt.Sprintf(`
 resource "aws_s3_bucket" "test" {
   bucket = %[1]q
+}
 
-  versioning {
-    enabled = %[2]t
+resource "aws_s3_bucket_versioning" "test" {
+  bucket = aws_s3_bucket.test.id
+  versioning_configuration {
+    status = "Enabled"
   }
 }
 
@@ -1752,9 +1758,12 @@ func testAccBucketObjectConfig_acl(rName string, content, acl string) string {
 	return fmt.Sprintf(`
 resource "aws_s3_bucket" "test" {
   bucket = %[1]q
+}
 
-  versioning {
-    enabled = true
+resource "aws_s3_bucket_versioning" "test" {
+  bucket = aws_s3_bucket.test.id
+  versioning_configuration {
+    status = "Enabled"
   }
 }
 
@@ -1786,9 +1795,12 @@ func testAccBucketObjectConfig_withTags(rName, key, content string) string {
 	return fmt.Sprintf(`
 resource "aws_s3_bucket" "test" {
   bucket = %[1]q
+}
 
-  versioning {
-    enabled = true
+resource "aws_s3_bucket_versioning" "test" {
+  bucket = aws_s3_bucket.test.id
+  versioning_configuration {
+    status = "Enabled"
   }
 }
 
@@ -1810,9 +1822,12 @@ func testAccBucketObjectConfig_withUpdatedTags(rName, key, content string) strin
 	return fmt.Sprintf(`
 resource "aws_s3_bucket" "test" {
   bucket = %[1]q
+}
 
-  versioning {
-    enabled = true
+resource "aws_s3_bucket_versioning" "test" {
+  bucket = aws_s3_bucket.test.id
+  versioning_configuration {
+    status = "Enabled"
   }
 }
 
@@ -1835,9 +1850,12 @@ func testAccBucketObjectConfig_withNoTags(rName, key, content string) string {
 	return fmt.Sprintf(`
 resource "aws_s3_bucket" "test" {
   bucket = %[1]q
+}
 
-  versioning {
-    enabled = true
+resource "aws_s3_bucket_versioning" "test" {
+  bucket = aws_s3_bucket.test.id
+  versioning_configuration {
+    status = "Enabled"
   }
 }
 
@@ -1872,12 +1890,15 @@ func testAccBucketObjectConfig_noObjectLockLegalHold(rName string, content strin
 resource "aws_s3_bucket" "test" {
   bucket = %[1]q
 
-  versioning {
-    enabled = true
-  }
-
   object_lock_configuration {
     object_lock_enabled = "Enabled"
+  }
+}
+
+resource "aws_s3_bucket_versioning" "test" {
+  bucket = aws_s3_bucket.test.id
+  versioning_configuration {
+    status = "Enabled"
   }
 }
 
@@ -1895,12 +1916,15 @@ func testAccBucketObjectConfig_withObjectLockLegalHold(rName string, content, le
 resource "aws_s3_bucket" "test" {
   bucket = %[1]q
 
-  versioning {
-    enabled = true
-  }
-
   object_lock_configuration {
     object_lock_enabled = "Enabled"
+  }
+}
+
+resource "aws_s3_bucket_versioning" "test" {
+  bucket = aws_s3_bucket.test.id
+  versioning_configuration {
+    status = "Enabled"
   }
 }
 
@@ -1919,12 +1943,15 @@ func testAccBucketObjectConfig_noObjectLockRetention(rName string, content strin
 resource "aws_s3_bucket" "test" {
   bucket = %[1]q
 
-  versioning {
-    enabled = true
-  }
-
   object_lock_configuration {
     object_lock_enabled = "Enabled"
+  }
+}
+
+resource "aws_s3_bucket_versioning" "test" {
+  bucket = aws_s3_bucket.test.id
+  versioning_configuration {
+    status = "Enabled"
   }
 }
 
@@ -1942,12 +1969,15 @@ func testAccBucketObjectConfig_withObjectLockRetention(rName string, content, re
 resource "aws_s3_bucket" "test" {
   bucket = %[1]q
 
-  versioning {
-    enabled = true
-  }
-
   object_lock_configuration {
     object_lock_enabled = "Enabled"
+  }
+}
+
+resource "aws_s3_bucket_versioning" "test" {
+  bucket = aws_s3_bucket.test.id
+  versioning_configuration {
+    status = "Enabled"
   }
 }
 

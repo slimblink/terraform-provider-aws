@@ -51,6 +51,7 @@ func ResourceBucketVersioning() *schema.Resource {
 						"mfa_delete": {
 							Type:         schema.TypeString,
 							Optional:     true,
+							Computed:     true,
 							ValidateFunc: validation.StringInSlice(s3.MFADelete_Values(), false),
 						},
 						"status": {

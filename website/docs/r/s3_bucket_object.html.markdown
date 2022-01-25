@@ -87,12 +87,15 @@ resource "aws_s3_bucket" "examplebucket" {
   bucket = "examplebuckettftest"
   acl    = "private"
 
-  versioning {
-    enabled = true
-  }
-
   object_lock_configuration {
     object_lock_enabled = "Enabled"
+  }
+}
+
+resource "aws_s3_bucket_versioning" "example" {
+  bucket = aws_s3_bucket.examplebucket.id
+  versioning_configuration {
+    status = "Enabled"
   }
 }
 
