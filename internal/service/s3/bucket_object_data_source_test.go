@@ -587,6 +587,9 @@ resource "aws_s3_bucket_versioning" "object_bucket" {
 }
 
 resource "aws_s3_bucket_object" "object" {
+  # Must have bucket versioning enabled first
+  depends_on = [aws_s3_bucket_versioning.object_bucket]
+
   bucket = aws_s3_bucket.object_bucket.bucket
   key    = "tf-testing-obj-%[1]d-all-params"
 
@@ -602,7 +605,7 @@ CONTENT
   content_language    = "en-GB"
 
   tags = {
-    Key1 =	 "Value 1"
+    Key1 = "Value 1"
   }
 }
 
